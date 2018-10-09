@@ -7,6 +7,7 @@ import java.util.Set;
 public class LongestIncreasingPathInMatrix {
 
     public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) return 0;
         Integer ans = Integer.MIN_VALUE;
         int[][] answer = new int[matrix.length][matrix[0].length];
 
@@ -14,29 +15,33 @@ public class LongestIncreasingPathInMatrix {
         Set<String> processing = new HashSet<>();
         for(int i = 0 ; i < matrix.length; i++){
             for(int j = 0; j < matrix[i].length; j++){
-                ans = Math.max(longestIncreasingPathDepthFirstSearch(i, j, null, visited, matrix, answer, processing), ans);
+                if(answer[i][j]==0) {
+                    ans = Math.max(longestIncreasingPathDepthFirstSearch(i, j, null, visited, matrix, answer, processing), ans);
+                }else{
+                    ans = Math.max(answer[i][j],ans);
+                }
             }
         }
         return ans;
     }
 
     private int longestIncreasingPathDepthFirstSearch(int row, int col, Integer prevValue, boolean [] visited, int[][] matrix, int[][] answer, Set<String> processing){
-        int ans = 0;
-        if(row >= matrix.length || col >= matrix[row].length || row < 0 || col < 0 || (prevValue != null && matrix[row][col] <= prevValue)){
-            return ans;
+        if(row >= matrix.length || row < 0 || col >= matrix[row].length || col < 0 || (prevValue != null && matrix[row][col] <= prevValue)){
+            return 0;
         }
+        int len = 1;
         if(!visited[(row*matrix[row].length) + col] && !processing.contains(row+","+col)) {
             int crtValue = matrix[row][col];
             processing.add(row+","+col);
-            ans = Math.max(longestIncreasingPathDepthFirstSearch(row++, col, crtValue, visited, matrix, answer, processing), ans);
-            ans = Math.max(longestIncreasingPathDepthFirstSearch(row, col++, crtValue, visited, matrix, answer, processing), ans);
-            ans = Math.max(longestIncreasingPathDepthFirstSearch(row--, col, crtValue, visited, matrix, answer, processing), ans);
-            ans = Math.max(longestIncreasingPathDepthFirstSearch(row, col--, crtValue, visited, matrix, answer, processing), ans);
-
+            len = Math.max(len, 1 + longestIncreasingPathDepthFirstSearch(row+1, col, crtValue, visited, matrix, answer, processing));
+            len = Math.max(len, 1 + longestIncreasingPathDepthFirstSearch(row, col+1, crtValue, visited, matrix, answer, processing));
+            len = Math.max(len, 1 + longestIncreasingPathDepthFirstSearch(row-1, col, crtValue, visited, matrix, answer, processing));
+            len = Math.max(len, 1 + longestIncreasingPathDepthFirstSearch(row, col-1, crtValue, visited, matrix, answer, processing));
+            processing.remove(row+","+col);
             visited[(row*matrix[row].length) + col] = true;
-            answer[row][col] = ans;
+            answer[row][col] = len;
         }
-        return ans;
+        return answer[row][col];
     }
 
     public static void main(String[] args) {
