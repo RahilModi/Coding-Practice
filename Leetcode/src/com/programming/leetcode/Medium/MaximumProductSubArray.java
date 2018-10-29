@@ -12,9 +12,11 @@ public class MaximumProductSubArray {
             int m = crt_min * nums[i];
 
             crt_max = Math.max(nums[i], Math.max(k,m));
+
             crt_min = Math.min(nums[i], Math.min(k,m));
 
             result = Math.max(result, crt_max);
+
         }
 
         return result;
