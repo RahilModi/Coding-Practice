@@ -2,12 +2,13 @@ package com.programming.leetcode.Medium;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class MaximumBinaryTree {
 
     public TreeNode constructMaximumBinaryTree(int[] nums) {
 
-        Deque<TreeNode> stack = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
         for(int i = 0; i < nums.length ; i++){
             TreeNode crtNode = new TreeNode(nums[i]);
 
@@ -20,8 +21,11 @@ public class MaximumBinaryTree {
             stack.push(crtNode);
         }
 
-        return stack.isEmpty() ? null : stack.removeLast();
-
+        TreeNode res = null;
+        while(!stack.isEmpty()){
+            res = stack.pop();
+        }
+        return res;
     }
 
     public TreeNode constructMaximumBinaryTreeUsingRecursion(int[] nums) {

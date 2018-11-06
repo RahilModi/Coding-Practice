@@ -38,15 +38,16 @@ public class MyCalendar{
         return true;
     }
 
+    TreeMap<Integer, Integer> temp = new TreeMap<>();
     public boolean bookV1(int start, int end){
-            Integer previousStartTime = bookingsSorted.floorKey(start);
-            Integer nextStartTime = bookingsSorted.ceilingKey(start);
+        Integer previousStartTime = bookingsSorted.floorKey(start);
+        Integer nextStartTime = bookingsSorted.ceilingKey(start);
 
-            if((previousStartTime == null || bookingsSorted.get(previousStartTime) <= start) && (nextStartTime == null || end <= nextStartTime)){
-                bookingsSorted.put(start, end);
-                return true;
-            }
-            return false;
+        if((previousStartTime == null || bookingsSorted.get(previousStartTime) <= start) && (nextStartTime == null || end <= nextStartTime)){
+            bookingsSorted.put(start, end);
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
