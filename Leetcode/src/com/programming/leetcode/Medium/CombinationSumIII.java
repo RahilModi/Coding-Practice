@@ -31,5 +31,4 @@ public class CombinationSumIII {
     public static void main(String[] args) {
         new CombinationSumIII().combinationSum3(3,7);
     }
-
 }
