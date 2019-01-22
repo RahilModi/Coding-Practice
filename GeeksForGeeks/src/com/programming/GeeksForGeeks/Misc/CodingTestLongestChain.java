@@ -6,7 +6,7 @@ public class CodingTestLongestChain {
         int[] distance = new int[input.length];
         int max_distance = Integer.MIN_VALUE;
         for(int i = 0; i < input.length; i++){
-            if(i != input[i]){
+            if(i != input[i]) {
                 int crt_distance = dfs_helper(input, i, i, distance, 1);
                 max_distance = Math.max(max_distance, crt_distance);
             }
