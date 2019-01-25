@@ -14,6 +14,29 @@ public class BuyAndSellWithCooldown {
         return Math.max(profit1, profit2);
     }
 
+
+    //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75927/Share-my-thinking-process
+    //buy[i]  = max(rest[i-1]-price, buy[i-1])
+    //sell[i] = max(buy[i-1]+price, sell[i-1])
+    //rest[i] = max(sell[i-1], buy[i-1], rest[i-1])
+    // also sell[i-1]= rest[i] && buy[i]<=rest[i] && rest[i]<=sell[i]
+//    Substitute this in to buy[i] we now have 2 functions instead of 3:
+//
+//    buy[i] = max(sell[i-2]-price, buy[i-1])
+//    sell[i] = max(buy[i-1]+price, sell[i-1])
+    public int maxProfitV2(int[] prices){
+        int prev_buy, buy, sell, prev_sell;
+        prev_buy = buy = Integer.MIN_VALUE;
+        prev_sell = sell = 0;
+        for(int price : prices){
+            prev_buy = buy;
+            buy = Math.max(prev_buy, prev_sell - price);
+            prev_sell = sell;
+            sell = Math.max(prev_sell, prev_buy+price);
+        }
+        return sell;
+    }
+
     // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75928/Share-my-DP-solution-(By-State-Machine-Thinking)
     public int maxProfitV1(int[] prices){
         int prev_rest = 0, crt_rest=0;
