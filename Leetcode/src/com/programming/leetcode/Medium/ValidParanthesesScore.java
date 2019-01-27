@@ -5,40 +5,19 @@ import java.util.Stack;
 public class ValidParanthesesScore {
 
     public int scoreOfParentheses(String S) {
-        Stack<Integer> operands = new Stack<>();
-        Stack<Character> operators = new Stack<>();
-        for(int i = 0; i < S.length(); i++){
-            char c = S.charAt(i);
-            if(c == ')'){
-                operands.push(1);
-                if( i + 1 < S.length() ) {
-                    if (S.charAt(i + 1) == '(') {
-                        operators.push('+');
-                    } else {
-                        operators.push('*');
-                        operands.push(2);
-                    }
-                }else if(i == S.length()-1){
-                    operators.push('*');
-                    operands.push(1);
-                }
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        for(char c: S.toCharArray()){
+            if(c=='('){
+                stack.push(0);
+            }else{
+                int o1 = Math.max(2 * stack.pop(),1);
+                int o2 = stack.pop();
+                int ans = o1 + o2;
+                stack.push(ans);
             }
         }
-        while(!operands.isEmpty() && !operators.isEmpty()){
-            int op1 = operands.pop();
-            int op2 = operands.pop();
-            switch (operators.pop()) {
-                case '+': {
-                    operands.push(op1 + op2);
-                    break;
-                }
-                case '*': {
-                    operands.push(op1 * op2);
-                    break;
-                }
-            }
-        }
-        return operands.pop();
+        return stack.pop();
     }
 
     public static void main(String[] args) {
