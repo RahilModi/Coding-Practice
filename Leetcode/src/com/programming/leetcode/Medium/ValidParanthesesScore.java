@@ -22,7 +22,7 @@ public class ValidParanthesesScore {
 
     public static void main(String[] args) {
         ValidParanthesesScore obj = new ValidParanthesesScore();
-        System.out.println(obj.scoreOfParentheses("()"));
+        System.out.println(obj.scoreOfParentheses("()()"));
         System.out.println(obj.scoreOfParentheses("(()(()))"));
         System.out.println(obj.scoreOfParentheses("(())"));
     }
