@@ -57,8 +57,8 @@ import java.util.Arrays;
  */
 public class FenwickTree {
 
-    int[] binaryIndexedTree;
-    int[] nums;
+    private int[] binaryIndexedTree;
+    private int[] nums;
 
     /***
      * Create a binary indexed tree...
