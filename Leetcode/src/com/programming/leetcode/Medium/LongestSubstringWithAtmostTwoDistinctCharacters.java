@@ -6,7 +6,7 @@ import java.util.Map;
 public class LongestSubstringWithAtmostTwoDistinctCharacters {
 
     public int lengthOfLongestSubstringTwoDistinct(String s) {
-
+        if(s == null || s.isEmpty()) return 0;
         Map<Character, Integer> charPos = new HashMap<>();
         int i = 0, begin = 0, maxLength =Integer.MIN_VALUE, count=0;
         while(i < s.length()){

@@ -6,7 +6,7 @@ import java.util.Map;
 public class LongestSubStringAtMostKDistinctChars {
 
     public int lengthOfLongestSubstringAtMostKDistinct(String s, int k) {
-
+        if(s == null || s.isEmpty() || k < 1)return 0;
         Map<Character, Integer> charPos = new HashMap<>();
         int i = 0, begin = 0, maxLength =Integer.MIN_VALUE, count=0;
         while(i < s.length()){
