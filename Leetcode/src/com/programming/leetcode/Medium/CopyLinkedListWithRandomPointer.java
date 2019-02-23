@@ -1,6 +1,8 @@
 package com.programming.leetcode.Medium;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 class RandomListNode {
@@ -85,8 +87,12 @@ public class CopyLinkedListWithRandomPointer {
             ptr = ptr.next;
             res.next = ptr == null ? null : ptr.next;
             res = res.next;
-        }
+            }
+
         return newHead;
+
+
+
     }
 
 

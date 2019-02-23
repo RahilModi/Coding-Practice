@@ -74,12 +74,14 @@ public class IntegerToEnglish {
         String[] words = {"Billion", "Million", "Thousand", "Hundred", "Ninety", "Eighty", "Seventy", "Sixty", "Fifty", "Forty", "Thirty", "Twenty", "Nineteen", "Eighteen", "Seventeen", "Sixteen", "Fifteen", "Fourteen", "Thirteen", "Twelve", "Eleven", "Ten", "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One"};
 
         for(int i = 0; i < nums.length; i++){
-            int p = n / nums[i]; // Prefix
-            int q = n % nums[i]; // Suffix
-            if(p > 0)
-                return ((n >= 100 ? numberToWords(p) : "")
-                        + " " + words[i] + " " +
-                        (q > 0 ? numberToWords(q) : "")).trim();
+            if(nums[i] <= n) {
+                int p = n / nums[i]; // Prefix
+                int q = n % nums[i]; // Suffix
+                if (p > 0)
+                    return ((n >= 100 ? numberToWordsV1(p) : "")
+                            + " " + words[i] + " " +
+                            (q > 0 ? numberToWordsV1(q) : "")).trim();
+            }
         }
         return "";
     }
