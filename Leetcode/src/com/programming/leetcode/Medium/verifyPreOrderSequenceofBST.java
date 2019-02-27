@@ -2,7 +2,7 @@ package com.programming.leetcode.Medium;
 
 import java.util.Stack;
 
-public class VerifyPreOrder {
+public class verifyPreOrderSequenceofBST {
 
     //O(n)
     public boolean verifyPreorder(int[] preorder) {
@@ -32,7 +32,7 @@ public class VerifyPreOrder {
     }
 
     public static void main(String[] args) {
-        VerifyPreOrder obj = new VerifyPreOrder();
+        verifyPreOrderSequenceofBST obj = new verifyPreOrderSequenceofBST();
         System.out.println(obj.verifyPreorderV1(new int[]{5,2,6,1,3}));
     }
 }
