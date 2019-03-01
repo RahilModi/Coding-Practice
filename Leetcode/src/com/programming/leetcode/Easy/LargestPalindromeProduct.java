@@ -1,9 +1,6 @@
 package com.programming.leetcode.Easy;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-public class LargestPalindromwProduct {
+public class LargestPalindromeProduct {
 
     private long getpalindrome(long num){
         return Long.parseLong(num + new StringBuilder().append(num).reverse().toString());
@@ -43,7 +40,7 @@ public class LargestPalindromwProduct {
     }
 
     public static void main(String[] args) {
-        System.out.println(new LargestPalindromwProduct().largestPalindrome(5));
+        System.out.println(new LargestPalindromeProduct().largestPalindrome(5));
     }
 
 }

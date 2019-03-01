@@ -28,4 +28,26 @@ public class LongestPalindromicSubString {
         }
         return j-i-1;
     }
+
+
+    int left = 0, maxLen = 0;
+    public String longestPalindromeV1(String s) {
+        if(s == null || s.length() < 2) return s;
+        for(int i = 0; i < s.length()-1; i++){
+            extendsValid(s, i, i);
+            extendsValid(s, i, i+1);
+        }
+        return s.substring(left, left+maxLen);
+    }
+
+    public void extendsValid(String s, int l, int r){
+        while(r < s.length() && l >= 0 && s.charAt(l) == s.charAt(r)){
+            l--;
+            r++;
+        }
+        if(maxLen < r - l -1 ){
+            left = l+1;
+            maxLen = r-l-1;
+        }
+    }
 }
