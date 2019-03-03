@@ -114,9 +114,8 @@ public class BackSpaceString {
 
     public boolean backspaceCompareV4(String S, String T) {
 
-        if(S == null && T == null) return true;
-        if(S == null || T == null) return false;
-        if(S.isEmpty() && T.isEmpty()) return true;
+        if((S == null && T == null) || (S.isEmpty() && T.isEmpty())) return true;
+        if( S == null || T == null) return false;
 
         int i = S.length() - 1, j = T.length() - 1;
         while (true) {

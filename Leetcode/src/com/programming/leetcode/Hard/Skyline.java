@@ -88,6 +88,38 @@ public class Skyline {
             return a[1] - b[1];
         });
 
+        /*
+        // Use a maxHeap to store possible heights
+        // But priority queue does not support remove in lgn time
+        // treemap support add, remove, get max in lgn time, so use treemap here
+        // key: height, value: number of this height
+        TreeMap<Integer, Integer> pq = new TreeMap<>();
+        pq.put(0, 1);
+        // Before starting, the previous max height is 0;
+        int prev = 0;
+        // visit all points in order
+        for (int[] h : height) {
+            // a start point, add height
+            if (h[1] < 0) {
+                pq.put(-h[1], pq.getOrDefault(-h[1], 0) + 1);
+            } else {  // a end point, remove height
+                if (pq.get(h[1]) > 1) {
+                    pq.put(h[1], pq.get(h[1]) - 1);
+                } else {
+                    pq.remove(h[1]);
+                }
+            }
+            int cur = pq.lastKey();
+            // compare current max height with previous max height, update result and
+            // previous max height if necessary
+            if (cur != prev) {
+                res.add(new int[]{h[0], cur});
+                prev = cur;
+            }
+        }
+        return res;
+         */
+
         // Use a maxHeap to store possible heights
         Queue<Integer> pq = new PriorityQueue<>((a, b) -> (b - a));
 
@@ -119,7 +151,7 @@ public class Skyline {
     public static void main(String[] args) {
         int [][] buildings = {{1,3,4},{3,4,4},{2,6,2},{8,11,4}, {7,9,3},{10,11,2}};
         Skyline sd = new Skyline();
-        List<int[]> criticalPoints = sd.getSkyline(buildings);
+        List<int[]> criticalPoints = sd.getSkyline_UsingQueue(buildings);
         criticalPoints.forEach(cp -> System.out.println(Arrays.toString(cp)));
     }
 
