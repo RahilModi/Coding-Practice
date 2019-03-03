@@ -22,14 +22,29 @@ public class MaximumProductSubArray {
         return result;
     }
 
-    private void swap(int num1, int num2){
-        int temp = num1;
-        num1 = num2;
-        num2 = num1;
+    public int maxProductV1(int[] nums){
+        if(nums == null || nums.length == 0) return 0;
+        int res, crtMax, crtMin;
+        res = crtMax = crtMin = nums[0];
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i] < 0){
+                int temp = crtMax;
+                crtMax = crtMin;
+                crtMin = temp;
+            }
+
+            crtMax = Math.max(nums[i], crtMax * nums[i]);
+            crtMin = Math.min(nums[i], crtMin * nums[i]);
+
+            res = res < crtMax ? crtMax : res;
+        }
+        return res;
     }
+
 
     public static void main(String[] args) {
         MaximumProductSubArray obj = new MaximumProductSubArray();
+        System.out.println(obj.maxProductV1(new int[]{2,3,-2,4}));
         System.out.println(obj.maxProduct(new int[]{2,3,-2,4}));
     }
 }

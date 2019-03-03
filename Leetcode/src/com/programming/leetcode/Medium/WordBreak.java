@@ -52,8 +52,31 @@ public class WordBreak {
         return false;
     }
 
+
+    //DP...
+
+    public boolean wordBreakDP(String s, List<String> wordDict) {
+        dict.addAll(wordDict);
+        int min_len = s.length();
+        for(String str: dict) {//very good optimization...we should not go further if difference is more than max length of the char.
+            min_len = Math.min(min_len, str.length());
+        }
+        boolean[] dp = new boolean[s.length()+1];
+        dp[0] = true;
+        for(int i = min_len; i <=s.length(); i++){
+            for(int j = 0; j < i; j++){
+                if(i-j >= min_len && dp[j] && dict.contains(s.substring(j,i))){
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
     public static void main(String[] args) {
         WordBreak obj = new WordBreak();
+        System.out.println(obj.wordBreakDP("leetcode", new ArrayList<>(Arrays.asList("leet","code"))));
         System.out.println(obj.wordBreakV1("leetcode", new ArrayList<>(Arrays.asList("leet","code"))));
     }
 
