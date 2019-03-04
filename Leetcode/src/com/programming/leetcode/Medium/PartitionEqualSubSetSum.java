@@ -58,11 +58,10 @@ public class PartitionEqualSubSetSum {
         boolean[] dp = new boolean[total+1];
         dp[0] = true;
         for (int num : nums) {
-            for (int i = total; i > 0; i--) {
-                if (i >= num) {
-                    dp[i] = dp[i] || dp[i-num];
-                }
+            for (int i = total; i >= num; i--) {
+                dp[i] = dp[i] || dp[i-num];
             }
+            if(dp[total]) break;
         }
 
         return dp[total];

@@ -43,6 +43,13 @@ public class TargetSum {
       return helperFunc(nums, 0, S , 0, new HashMap<>());
     }
 
+    //https://leetcode.com/problems/target-sum/discuss/97334/Java-(15-ms)-C%2B%2B-(3-ms)-O(ns)-iterative-DP-solution-using-subset-sum-with-explanation
+    /*
+    SUM(Positives)-SUM(negatives) = target
+    SUM(Positives)-SUM(negatives)  + SUM(Positives)+SUM(negatives)  = target + SUM(Positives)+SUM(negatives)
+    2 * SUM(Positives) = target + (sum of all nums)
+    sum(positives) = (target + sum of all) /2
+    */
     public int findTargetSumWaysDP(int[] nums, int s) {
         int sum = 0;
         for (int n : nums)

@@ -56,7 +56,25 @@ public class BuyAndSellWithCooldown {
         return Math.max(crt_rest, crt_sell);
     }
 
+    public int maxProfitStateMachine(int [] prices){
+        if(prices == null || prices.length < 2) return 0;
+        int days = prices.length;
+        int[] rest = new int[days];
+        int[] buy = new int[days];
+        int[] sell = new int[days];
+        buy[0] = -prices[0];
+        sell[0]= Integer.MIN_VALUE;
+
+        for(int i = 1; i < prices.length; i++){
+            rest[i] = Math.max(sell[i-1], rest[i-1]);
+            buy[i] = Math.max(rest[i-1]-prices[i], buy[i-1]);
+            sell[i] = buy[i-1]+prices[i];
+        }
+        return Math.max(rest[days-1], sell[days-1]);
+    }
+
     public static void main(String[] args) {
+        System.out.println(new BuyAndSellWithCooldown().maxProfitStateMachine(new int[]{1,2,3,0,2}));
         System.out.println(new BuyAndSellWithCooldown().maxProfit(new int[]{1,2,3,0,2}));
         System.out.println(new BuyAndSellWithCooldown().maxProfitV1(new int[]{1,2,3,0,2}));
     }
