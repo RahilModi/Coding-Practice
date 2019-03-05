@@ -53,8 +53,26 @@ public class FindAndReplace {
         return ans.toString();
     }
 
+    public String findReplaceStringV2(String S, int[] indexes, String[] sources, String[] targets) {
+        StringBuilder sb = new StringBuilder();
+        int prev = 0;
+        TreeMap<Integer, String[]> map = new TreeMap<>();
+        for(int i=0; i < indexes.length; i++){
+            map.put(indexes[i], new String[]{sources[i],targets[i]});
+        }
+        for(Map.Entry<Integer, String[]> entry: map.entrySet()){
+            if(S.substring(entry.getKey(), entry.getKey()+entry.getValue()[0].length()).equals(entry.getValue()[0])){
+                sb.append(S.substring(prev, entry.getKey()));
+                sb.append(entry.getValue()[1]);
+                prev = entry.getKey()+entry.getValue()[0].length();
+            }
+        }
+        sb.append(S.substring(prev, S.length()));
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         FindAndReplace obj = new FindAndReplace();
-        System.out.println(obj.findReplaceString("abcd", new int[]{0,2}, new String[]{"a","cd"},new String[]{"www","fff"}));
+        System.out.println(obj.findReplaceStringV2("abcd", new int[]{0,2}, new String[]{"a","cd"},new String[]{"www","fff"}));
     }
 }

@@ -41,6 +41,27 @@ public class PalindromicSubStringCount {
         return count;
     }
 
+
+    //same approach of extending but using class variable
+    int counter= 0;
+    public int countSubstringsV3(String s) {
+        counter = 1;
+        if(s == null || s.isEmpty()) return 0;
+        for(int i = 0; i < s.length()-1; i++){
+            checkExtendedPalindrome(i,i,s);
+            checkExtendedPalindrome(i,i+1,s);
+        }
+        return counter;
+    }
+
+    private void checkExtendedPalindrome(int i, int j, String s){
+        while(i>=0 && j < s.length() && s.charAt(i) == s.charAt(j)){
+            i--;
+            j++;
+            counter++;
+        }
+    }
+
     public static void main(String[] args) {
         PalindromicSubStringCount obj = new PalindromicSubStringCount();
         System.out.println(obj.countSubstrings("aba"));

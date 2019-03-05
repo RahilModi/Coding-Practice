@@ -35,6 +35,25 @@ public class NumDecodeWays {
         return dp[p]=res;
     }
 
+    public int numDecodedingsV2(String s){
+        if(s == null || s.length() == 0) return 0;
+        int n = s.length();
+        int[] dp = new int[n+1];
+        dp[n] = 1;
+        dp[n-1] = s.charAt(n-1) == '0' ? 0 : 1;
+
+        for(int i = n-2; i >= 0; i++){
+            if(s.charAt(i) == '0') continue;
+            else{
+                dp[i] = dp[i+1];
+                dp[i] += Integer.valueOf(s.substring(i,i+2)) <= 26 ?  dp[i+2] : 0;
+            }
+        }
+
+        return dp[0];
+
+    }
+
     public static void main(String[] args) {
         NumDecodeWays obj = new NumDecodeWays();
         System.out.println(obj.numDecodings("27"));
