@@ -32,6 +32,20 @@ public class UncommonWordsInSentence {
 
     }
 
+    public String[] uncommonFromSentencesV1(String A, String B) {
+        Map<String, Integer> wordFreq = new HashMap<>();
+        for(String w : (A+" "+B).split("\\s")){
+            wordFreq.put(w, wordFreq.getOrDefault(w, 0)+1);
+        }
+        List<String> res = new ArrayList<>();
+        for(String wrd : wordFreq.keySet()){
+            if(wordFreq.get(wrd) == 1){
+                res.add(wrd);
+            }
+        }
+        return res.toArray(new String[0]);
+    }
+
     public static void main(String[] args) {
 
         String[] res = UncommonWordsInSentence.uncommonFromSentences("this apple is sweet",  "this apple is sour");

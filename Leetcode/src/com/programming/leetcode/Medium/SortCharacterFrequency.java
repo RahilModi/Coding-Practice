@@ -1,6 +1,7 @@
 package com.programming.leetcode.Medium;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SortCharacterFrequency {
 
@@ -37,6 +38,41 @@ public class SortCharacterFrequency {
             Map.Entry e = pq.poll();
             for (int i = 0; i < (int) e.getValue(); i++)
                 sb.append(e.getKey());
+        }
+        return sb.toString();
+    }
+
+    public String frequencySortV2(String s) {
+        Map<Character, Integer> freq = new TreeMap<>();
+        for(char c : s.toCharArray()){
+            freq.put(c, freq.getOrDefault(c, 0)+1);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Map<Character, Integer> res = freq.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        for(Map.Entry<Character, Integer> entry : res.entrySet()){
+            int val = entry.getValue();
+            while (val-- > 0){
+                sb.append(entry.getKey());
+            }
+        }
+        return sb.toString();
+    }
+
+    public String frequencySorV3(String s) {
+        Map<Character, Integer> freq = new TreeMap<>();
+        for(char c : s.toCharArray()){
+            freq.put(c, freq.getOrDefault(c, 0)+1);
+        }
+        PriorityQueue<Map.Entry<Character, Integer>> pq = new PriorityQueue<>((a,b)->b.getValue()-a.getValue());
+        pq.addAll(freq.entrySet());
+        StringBuilder sb = new StringBuilder();
+        while (!pq.isEmpty()){
+            Map.Entry<Character,Integer> val = pq.poll();
+            int v = val.getValue();
+            while (v-->0){
+                sb.append(val.getKey());
+            }
         }
         return sb.toString();
     }

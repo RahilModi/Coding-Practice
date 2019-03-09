@@ -59,8 +59,5 @@ public class RobotRoomCleaner {
             k++;
         }
 
-
-
-
     }
 }
