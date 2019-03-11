@@ -1,7 +1,6 @@
 package com.programming.leetcode.Hard;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RemoveInvalidParantheses {
 
@@ -30,7 +29,54 @@ public class RemoveInvalidParantheses {
         }
     }
 
+
+    public List<String> removeInvalidParenthesesBFS(String s) {
+
+        if(s == null) return null;
+
+        Set<String> visited = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+
+        queue.add(s);
+        visited.add(s);
+
+        boolean bFound =false;
+        List<String> res = new ArrayList<>();
+        while (!queue.isEmpty()){
+            String crt = queue.poll();
+            if(isValid(crt)){
+                bFound = true;
+                res.add(crt);
+            }
+            if(bFound) continue;
+
+            for(int i = 0; i < crt.length(); i++){
+                if (crt.charAt(i) != '(' && crt.charAt(i) != ')') continue;
+                String sub = crt.substring(0,i) + crt.substring(i+1);
+                if(!visited.contains(sub)){
+                    visited.add(sub);
+                    queue.offer(sub);
+                }
+            }
+        }
+
+        return res;
+
+    }
+
+    public boolean isValid(String s){
+        int counter = 0;
+        for(char c : s.toCharArray()){
+            if(c == '(') counter++;
+            else if(c == ')' && counter-- == 0)  return false;
+        }
+        return counter == 0;
+    }
+
     public static void main(String[] args) {
+
+        System.out.println(new RemoveInvalidParantheses().removeInvalidParenthesesBFS("()())()"));
+
         new RemoveInvalidParantheses().removeInvalidParentheses("()())()");
     }
 }

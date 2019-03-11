@@ -77,10 +77,9 @@ public class IntegerToEnglish {
             if(nums[i] <= n) {
                 int p = n / nums[i]; // Prefix
                 int q = n % nums[i]; // Suffix
-                if (p > 0)
-                    return ((n >= 100 ? numberToWordsV1(p) : "")
-                            + " " + words[i] + " " +
-                            (q > 0 ? numberToWordsV1(q) : "")).trim();
+                return ((n >= 100 ? numberToWordsV1(p) : "")
+                        + " " + words[i] + " " +
+                        (q > 0 ? numberToWordsV1(q) : "")).trim();
             }
         }
         return "";
