@@ -33,6 +33,36 @@ public class WordSearch {
         return false;
     }
 
+
+    public boolean existV1(char[][] board, String word) {
+
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++){
+                if(board[i][j] == word.charAt(0) && backtrackV1(board, i, j, 0, word)){
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    public boolean backtrackV1(char[][] board, int i, int j, int crtPos, String target){
+        if(i < 0 || j < 0 || i >= board.length || j >= board[0].length || crtPos > target.length() || target.charAt(crtPos) != board[i][j]){
+            return false;
+        }
+        char crt = board[i][j];
+        if(crtPos == target.length()-1){
+            return true;
+        }
+        board[i][j] = ' ';
+        if(backtrackV1(board, i+1, j, crtPos+1, target) || backtrackV1(board, i-1, j, crtPos+1, target) || backtrackV1(board, i, j+1, crtPos+1, target) || backtrackV1(board, i, j-1, crtPos+1, target)){
+            return true;
+        }
+        board[i][j] = crt;
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println(new WordSearch().exist(new char[][]{
                 {'A', 'B', 'C', 'E'},
@@ -48,7 +78,7 @@ public class WordSearch {
 
         System.out.println(new WordSearch().exist(new char[][]{{'a','b'},{'c','d'}},"bacd"));
 
-        System.out.println(new WordSearch().exist(new char[][]{{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}},
+        System.out.println(new WordSearch().existV1(new char[][]{{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}},
         "ABCESEEEFS"));
     }
 }

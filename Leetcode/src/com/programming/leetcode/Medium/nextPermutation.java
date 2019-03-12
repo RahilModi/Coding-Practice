@@ -31,7 +31,7 @@ public class nextPermutation {
 
         reverse(nums, i);
 
-        print(nums);
+        System.out.println(Arrays.toString(nums));
     }
 
     private void reverse(int[] nums, int i){
@@ -41,10 +41,6 @@ public class nextPermutation {
             nums[left++] = nums[right];
             nums[right--] = temp;
         }
-    }
-
-    private void print(int [] nums){
-        for(int i : nums) System.out.print(i+ ", ");
     }
 
 

@@ -23,6 +23,16 @@ public class RemoveDuplicatesFromSortedArrayII {
         return i;
     }
 
+    public int removeDuplicatesV3(int[] nums) {
+        int j = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(i == 0 || nums[i] != nums[i-1]){
+                nums[j++] = nums[i];
+            }
+        }
+        return j;
+    }
+
     public static void main(String[] args) {
         RemoveDuplicatesFromSortedArrayII obj = new RemoveDuplicatesFromSortedArrayII();
         System.out.println(obj.removeDuplicates(new int[]{1,2,2,2,3,3,4,5,5,5,6}));

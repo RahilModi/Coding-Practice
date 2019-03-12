@@ -63,7 +63,11 @@ public class WordSearchII {
     public List<String> findWordsV2(char[][] board, String[] words) {
         TrieNode trie = buildTrie(words);
         List<String> res = new ArrayList<>();
-        backtrackV2(board,0,0,trie,res);
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                backtrackV2 (board, i, j, trie, res);
+            }
+        }
         return res;
     }
 
@@ -92,7 +96,7 @@ public class WordSearchII {
         WordSearchII obj = new WordSearchII();
         System.out.println(obj.findWords(new char[][]{{'a','b','c'},{'a','e','d'},{'a','f','g'}},new String[]{"eaabcdgfa"}));
         System.out.println(obj.findWords(new char[][]{{'a'}},new String[]{"a"}));
-        System.out.println(obj.findWords(board,words));
+        System.out.println(obj.findWordsV2(board,words));
     }
 
 }

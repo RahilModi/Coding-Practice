@@ -22,6 +22,20 @@ public class FindMinInRotatedSortedArrayII {
         return nums[left]; //both are working fine nums[right]
     }
 
+    public int findMinV1(int[] nums) {
+        int l = 0, r = nums.length-1;
+        while(l < r){
+            int mid = l+ (r-l)/2;
+            if(nums[mid] < nums[r]) r= mid;
+            else if(nums[mid] > nums[r]){
+                l = mid+1;
+            }else{
+                r--;
+            }
+        }
+        return nums[l];
+    }
+
     public static void main(String[] args) {
         FindMinInRotatedSortedArrayII obj = new FindMinInRotatedSortedArrayII();
         System.out.println(obj.findMin(new int[]{2,2,2,0,1,2}));
