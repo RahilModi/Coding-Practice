@@ -57,7 +57,34 @@ public class GenerateParantheses {
         }
     }
 
+    public List<String> generateParenthesisV3(int n) {
+        List<String> res = new ArrayList<>();
+        backtrack(n, "", res);
+        return res;
+    }
+    private void backtrack(int n, String s, List<String> res){
+        if(s.length() == 2*n ) {
+            if (isValid(s)) {
+                res.add(s);
+            }
+            return;
+        }
+
+        backtrack(n, s+"(", res);
+        backtrack(n, s+")", res);
+    }
+
+    private boolean isValid(String s){
+        int count = 0;
+        for(char c : s.toCharArray()){
+            if(c=='(') count++;
+            else if(c ==')' && --count < 0) return false;
+        }
+        return count == 0;
+    }
+
     public static void main(String[] args) {
+        System.out.println(new GenerateParantheses().generateParenthesisV3(3).size());
         System.out.println(new GenerateParantheses().generateParenthesis(3).size());
         List<String> combinations =new GenerateParantheses().generateParenthesisV2(3);
         for(String str :combinations) System.out.println(str);

@@ -8,16 +8,11 @@ public class NextGreaterElementII {
         int [] res = new int[nums.length];
         Stack<Integer> stack = new Stack<>();
         for(int i = 0; i < nums.length; i++) {
-            if (stack.isEmpty() || nums[stack.peek()] >= nums[i]){
-                stack.push(i);
-            }else {
-                while (!stack.isEmpty() && nums[stack.peek()] < nums[i]){
-                    res[stack.pop()] = nums[i];
-                }
-                stack.push(i);
+            while (!stack.isEmpty() && nums[stack.peek()] < nums[i]){
+                res[stack.pop()] = nums[i];
             }
+            stack.push(i);
         }
-        int max = Integer.MIN_VALUE;
         for(int i = 0; i < nums.length && !stack.isEmpty();i++){
             while(!stack.isEmpty() && nums[i] > nums[stack.peek()]){
                 res[stack.pop()] = nums[i];
@@ -29,17 +24,6 @@ public class NextGreaterElementII {
         while(!stack.isEmpty()){
             res[stack.pop()] = -1;
         }
-
-
-
-//        for(int i = 0; i < nums.length && !stack.isEmpty(); i++){
-//            while(!stack.isEmpty() && nums[stack.peek()] < nums[i]){
-//                res[stack.pop()] = nums[i];
-//            }
-//            while (!stack.isEmpty() && nums[stack.peek()] == nums[i]){
-//                res[stack.pop()] = -1;
-//            }
-//        }
         return res;
     }
 

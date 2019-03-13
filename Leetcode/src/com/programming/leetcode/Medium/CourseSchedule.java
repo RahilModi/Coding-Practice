@@ -39,6 +39,41 @@ public class CourseSchedule {
         return true;
     }
 
+    public boolean canFinishV1(int numCourses, int[][] prerequisites) {
+
+        Map<Integer, List<Integer>> preReqMap = new HashMap<>();
+        for(int[] prereq : prerequisites){
+            preReqMap.computeIfAbsent(prereq[1], k -> new ArrayList<>()).add(prereq[0]);
+        }
+
+        boolean[] seen = new boolean[numCourses];
+        for(int i = 0; i < numCourses; i++){
+            if(!seen[i]){
+                if(!topologicalSort(preReqMap, seen, new HashSet<>(), i)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean topologicalSort(Map<Integer, List<Integer>> map, boolean[] visited, Set<Integer> crtLoop, int key){
+        crtLoop.add(key);
+        visited[key] = true;
+        if(map.containsKey(key)){
+            for(Integer dep : map.get(key)){
+                if(crtLoop.contains(dep)) return false;
+                if(!visited[dep]){
+                    if(!topologicalSort(map, visited, crtLoop, dep)){
+                        return false;
+                    }
+                }
+            }
+        }
+        crtLoop.remove(key);
+        return true;
+    }
+
     public static void main(String[] args) {
         new CourseSchedule().canFinish(2, new int[][]{{1,0},{0,1}});
     }

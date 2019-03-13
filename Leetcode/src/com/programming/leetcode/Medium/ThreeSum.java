@@ -1,8 +1,6 @@
 package com.programming.leetcode.Medium;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ThreeSum {
     public List<List<Integer>> threeSum(int[] nums) {
@@ -29,5 +27,28 @@ public class ThreeSum {
             }
         }
         return res;
+    }
+
+
+    public List<List<Integer>> isThreeSum(int[] nums, int target){
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = 0; i < nums.length-2; i++){
+            int newTarget = target-nums[i];
+            Map<Integer, Integer> map = new HashMap<>();
+            for(int j = i+1; j < nums.length; j++){
+                if(map.containsKey(nums[j])){
+                    int k= map.get(nums[j]);
+                    res.add(Arrays.asList(nums[i],nums[j],nums[k]));
+                }else {
+                    map.put(newTarget - nums[j], j);
+                }
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        ThreeSum obj = new ThreeSum();
+        System.out.println(obj.isThreeSum(new int[]{1,5,2,7,3,10,23,8},20));
     }
 }

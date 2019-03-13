@@ -1,5 +1,6 @@
 package com.programming.leetcode.Hard;
 
+import com.programming.leetcode.Easy.MajorityElement;
 import com.programming.leetcode.Medium.PalindromePartitioning;
 
 import java.util.ArrayList;
@@ -36,6 +37,24 @@ public class PalindromePartitioningII {
         }
         return true;
     }
+
+
+    public int minCutDP(String s) {
+        int n = s.length();
+        int[] dp = new int[n+1];
+        for(int i = 0; i <= n; i++) dp[i] = i-1;
+
+        for(int i = 0; i < n ; i++){
+            for(int j = 0; i - j >= 0 && i + j < n && s.charAt(i-j) == s.charAt(i+j); j++){
+                dp[i+j+1] = Math.min(dp[i+j+1], dp[i-j]+1);
+            }
+            for(int j = 1; i-j+1>=0 && i+j < n && s.charAt(i-j+1) == s.charAt(i+j); j++){
+                dp[i+j+1] = Math.min(dp[i+j+1], dp[i-j+1]+1);
+            }
+        }
+        return dp[n];
+    }
+
 
     public static void main(String[] args) {
         PalindromePartitioningII obj = new PalindromePartitioningII();

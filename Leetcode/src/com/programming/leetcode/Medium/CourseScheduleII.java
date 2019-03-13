@@ -89,8 +89,52 @@ public class CourseScheduleII {
         return visited == numCourses ? order : new int[0];
     }
 
+
+    public int[] findOrderV2(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> preReqMap = new HashMap<>();
+        for(int[] prereq : prerequisites){
+            preReqMap.computeIfAbsent(prereq[1], k -> new ArrayList<>()).add(prereq[0]);
+        }
+
+        boolean[] seen = new boolean[numCourses];
+        Stack<Integer> seq = new Stack<>();
+        for(int i = 0; i < numCourses; i++){
+            if(!seen[i]){
+                if(!topologicalSort(preReqMap, seen, new HashSet<>(), i, seq)){
+                    return new int[]{};
+                }
+            }
+        }
+        int[] res = new int[seq.size()];
+        int i = 0;
+        while(!seq.isEmpty()){
+            res[i++] = seq.pop();
+        }
+        return res;
+    }
+
+    private boolean topologicalSort(Map<Integer, List<Integer>> map, boolean[] visited, Set<Integer> crtLoop, int key, Stack<Integer> seq){
+        crtLoop.add(key);
+        visited[key] = true;
+        if(map.containsKey(key)){
+            for(Integer dep : map.get(key)){
+                if(crtLoop.contains(dep)) return false;
+                if(!visited[dep]){
+                    if(!topologicalSort(map, visited, crtLoop, dep,seq)){
+                        return false;
+                    }
+                }
+            }
+        }
+        crtLoop.remove(key);
+        seq.push(key);
+        return true;
+    }
+
     public static void main(String[] args) {
         int[] res;
+        res = new CourseScheduleII().findOrderV2(2, new int[][]{{1,0}});
+        System.out.println(Arrays.toString(res));
         res = new CourseScheduleII().findOrder(3,new int[][]{{2,0},{2,1}});
         System.out.println(Arrays.toString(res));
         res = new CourseScheduleII().findOrder(2, new int[][]{{1,0}});

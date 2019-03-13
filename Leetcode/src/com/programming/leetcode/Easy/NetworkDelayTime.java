@@ -7,12 +7,7 @@ public class NetworkDelayTime {
     Map<Integer, List<int[]>> adjList = new HashMap<>();
     public int networkDelayTime(int[][] times, int N, int K) {
         for(int[] edge: times){
-            List<int[]> t = adjList.get(edge[0]);
-            if(t == null){
-                t = new ArrayList<>();
-            }
-            t.add(new int[]{edge[1],edge[2]});
-            adjList.put(edge[0],t);
+            adjList.computeIfAbsent(edge[0], k -> new ArrayList<>()).add(new int[]{edge[1],edge[2]});
         }
         List<int[]> edges = adjList.get(K);
         if(edges == null) return -1;

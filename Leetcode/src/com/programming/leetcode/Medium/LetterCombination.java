@@ -43,6 +43,25 @@ public class LetterCombination {
         }
     }
 
+    String[] digitsArr = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    public List<String> letterCombinationsV1(String digits) {
+        List<String> res = new ArrayList<>();
+        if(digits == null || digits.isEmpty()) return res;
+        backtrack(0, digits, res, new StringBuilder());
+        return res;
+    }
+
+    private void backtrack(int crtIndex, String digits, List<String> r, StringBuilder crt){
+        if(crtIndex == digits.length()){
+            r.add(crt.toString());
+            return;
+        }
+        for(char c : digitsArr[digits.charAt(crtIndex) - '0'].toCharArray()){
+            backtrack(crtIndex+1, digits, r, crt.append(c));
+            crt.deleteCharAt(crt.length()-1);
+        }
+    }
+
     public static void main(String[] args) {
         List<String> res = new LetterCombination().letterCombinations("234");
         for(String r :res) System.out.println(r);

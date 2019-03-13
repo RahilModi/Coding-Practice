@@ -80,6 +80,35 @@ public class BestMeetingPoint {
         return i;
     }
 
+    public int minTotalDistanceV2(int[][] grid) {
+
+        List<Integer> x = new ArrayList<>();
+        List<Integer> y = new ArrayList<>();
+
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[i].length; j++){
+                if(grid[i][j] == 1){
+                    x.add(i);
+                    y.add(j);
+                }
+            }
+        }
+
+        return getMin(x) + getMin(y);
+
+    }
+
+    private int getMin(List<Integer> res){
+        int i = 0, j = res.size()-1;
+        int ret = 0;
+        Collections.sort(res);
+
+        while(i < j){
+            ret += res.get(j--) - res.get(i++);
+        }
+        return ret;
+    }
+
     //QuickSelect take O(n) to finding nth Pos in sorted array from the unsorted array
     private int quickSelect(List<Integer> list, int n, int low, int high){
 
