@@ -60,25 +60,25 @@ public class BasicCalculatorII {
         if(s==null || (len = s.length())==0) return 0;
         Stack<Integer> stack = new Stack<Integer>();
         int num = 0;
-        char sign = '+';
+        char prev = '+';
         for(int i=0;i<len;i++){
             if(Character.isDigit(s.charAt(i))){
                 num = num*10+s.charAt(i)-'0';
             }
             if((!Character.isDigit(s.charAt(i)) &&' '!=s.charAt(i)) || i==len-1){
-                if(sign=='-'){
+                if(prev=='-'){
                     stack.push(-num);
                 }
-                if(sign=='+'){
+                if(prev=='+'){
                     stack.push(num);
                 }
-                if(sign=='*'){
+                if(prev=='*'){
                     stack.push(stack.pop()*num);
                 }
-                if(sign=='/'){
+                if(prev=='/'){
                     stack.push(stack.pop()/num);
                 }
-                sign = s.charAt(i);
+                prev = s.charAt(i);
                 num = 0;
             }
         }

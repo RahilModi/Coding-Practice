@@ -1,9 +1,6 @@
 package com.programming.leetcode.Medium;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class NestedListWeightSumII {
 
@@ -27,24 +24,21 @@ public class NestedListWeightSumII {
     }
 
     public int depthSumInverseBFS(List<NestedInteger> nestedList){
-        if(nestedList == null || nestedList.isEmpty()) return 0;
-        int prev = 0, total = 0;
-        Queue<NestedInteger> q= new ArrayDeque<>();
-        for(NestedInteger next: nestedList){
-            q.offer(next);
+        if(nestedList == null || nestedList.size() == 0) return 0;
+        int prev, total;
+        prev = total = 0;
+        Queue<NestedInteger> queue= new LinkedList<>();
+        for(NestedInteger num : nestedList){
+            queue.offer(num);
         }
-        while (!q.isEmpty()){
-            int size = q.size();
+        while(!queue.isEmpty()){
             int levelSum = 0;
-            for(int i = 0; i < size; i++){
-                NestedInteger crt = q.poll();
-                if(crt.isInteger()) levelSum += crt.getInteger();
-                else{
-                    List<NestedInteger> nextLevel = crt.getList();
-                    if(nextLevel != null){
-                        for(NestedInteger n : nextLevel){
-                            q.offer(n);
-                        }
+            for(int size = queue.size(); size > 0 ; size--){
+                NestedInteger crt = queue.poll();
+                if(crt != null){
+                    if(crt.isInteger()) levelSum += crt.getInteger();
+                    else{
+                        queue.addAll(crt.getList());
                     }
                 }
             }

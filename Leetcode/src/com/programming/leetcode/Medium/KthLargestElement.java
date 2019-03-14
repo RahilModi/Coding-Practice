@@ -23,18 +23,18 @@ public class KthLargestElement {
     }
 
     private int partition(int[] a, int lo, int hi) {
-        int pivot = a[lo];
-        int pivotIndex = lo;
-        lo++;
-        while(lo <= hi){
-            if(a[lo] < pivot ) lo++;
-            else if(a[hi] >= pivot) hi--;
-            else{
-                swap(a,lo,hi);
+        int i = lo;
+        int j = hi + 1;
+        while(true) {
+            while(i < hi && a[++i] < a[lo]);
+            while(j > lo && a[lo] < a[--j]);
+            if(i >= j) {
+                break;
             }
+            swap(a, i, j);
         }
-        swap(a, pivotIndex, hi);
-        return lo;
+        swap(a, lo, j);
+        return j;
     }
 
     private void swap(int[] arr, int i, int j) {
