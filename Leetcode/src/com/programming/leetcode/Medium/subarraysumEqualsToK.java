@@ -7,7 +7,6 @@ public class subarraysumEqualsToK {
 
     public int subarraySum(int[] nums, int k) {
         if(nums == null || nums.length == 0) return 0;
-        if(nums.length == 1) if(nums[0] == k) return 1;else return 0;
         Map<Integer,Integer> preSum =new HashMap<>();
         preSum.put(0,1);
         int sum =0, count = 0;
