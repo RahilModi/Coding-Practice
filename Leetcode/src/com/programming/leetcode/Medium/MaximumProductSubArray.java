@@ -41,6 +41,31 @@ public class MaximumProductSubArray {
         return res;
     }
 
+    //Easy to understand O(n) solution :
+    //Its all about having odd or even numbers of negative integers.
+    //if the negative numbers are even, then the first pass will give the solution.
+    // If the negative numbers are odd, the second pass will give the solution.
+    public int maxProductV2(int[] nums) {
+        int prod = 1;
+        int result = Integer.MIN_VALUE;
+        for(int i = 0; i < nums.length; i++) {
+            prod = prod * nums[i];
+            result = Math.max(prod, result);
+            if(prod == 0) {
+                prod = 1;
+            }
+        }
+        prod = 1;
+        for(int i = nums.length - 1; i >= 0; i--) {
+            prod = prod * nums[i];
+            result = Math.max(prod, result);
+            if(prod == 0) {
+                prod = 1;
+            }
+        }
+        return result;
+    }
+
 
     public static void main(String[] args) {
         MaximumProductSubArray obj = new MaximumProductSubArray();

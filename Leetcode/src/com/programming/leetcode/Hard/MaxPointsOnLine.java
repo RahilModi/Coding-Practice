@@ -12,7 +12,7 @@ public class MaxPointsOnLine {
       int y;
       Point() { x = 0; y = 0; }
       Point(int a, int b) { x = a; y = b; }
-  }
+    }
 
   //If the slop calculated by the points is the same means they follow on the same line.
     public int maxPoints(Point[] points) {
