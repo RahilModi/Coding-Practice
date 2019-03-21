@@ -2,6 +2,7 @@ package com.programming.leetcode.Hard;
 
 public class SuperEggDropping {
 
+    //O(KN^2) DP solution, where dp[k][n] = min(1 + max(dp[k - 1][i - 1], dp[k][n - i])) i = 1...n
     public int superEggDrop(int K, int N) {
 
         int[][] dp = new int[K+1][N+1];
@@ -41,6 +42,15 @@ public class SuperEggDropping {
             for (int k = 1; k <= K; ++k)
                 dp[m][k] = dp[m - 1][k - 1] + dp[m - 1][k] + 1;
         }
+        return m;
+    }
+
+    //super egg drop one dimensional solution..
+    public int superEggDropV2(int K, int N) {
+        int dp[] = new int[K + 1], m;
+        for (m = 0; dp[K] < N; ++m)
+            for (int k = K; k > 0; --k)
+                dp[k] += dp[k - 1] + 1;
         return m;
     }
 

@@ -13,8 +13,4 @@ public class SmallestRange1 {
         return Math.max(0, (max - k) - (min + k));
 
     }
-
-    public static void main(String[] args) {
-
-    }
 }
