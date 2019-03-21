@@ -18,10 +18,10 @@ public class MaxFreqStack {
     public void push(int x) {
         freqCount.put(x, freqCount.getOrDefault(x, 0)+1);
         int freq = freqCount.get(x);
-        if(maxFreqCount < freqCount.get(x)){
-            maxFreqCount = freqCount.get(x);
+        if(maxFreqCount < freq){
+            maxFreqCount = freq;
         }
-        maxFreq.computeIfAbsent(freq, k -> new Stack<Integer>()).push(x);
+        maxFreq.computeIfAbsent(freq, k -> new Stack<>()).push(x);
     }
 
 
