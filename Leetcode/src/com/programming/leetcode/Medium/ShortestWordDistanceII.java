@@ -35,12 +35,10 @@ public class ShortestWordDistanceII {
     }
 
     public int shortestV2(String word1, String word2) {
-        int min_dist = Integer.MAX_VALUE;
-        List<Integer> word1Indexes = wordIndexMapping.get(word1);
-        List<Integer> word2Indexes = wordIndexMapping.get(word2);
 
-        int p1, p2, index1, index2;
-        p1 = p2 = -1;
+        List<Integer> word1Indexes = wordIndexMapping.get(word1), word2Indexes = wordIndexMapping.get(word2);
+
+        int p1, p2, index1, index2,min_dist = Integer.MAX_VALUE;
         index1 = index2 = 0;
         while( index1 < word1Indexes.size() && index2 < word2Indexes.size() ){
             p1 = word1Indexes.get(index1);
@@ -50,16 +48,6 @@ public class ShortestWordDistanceII {
 
             if(p1 < p2) index1++;
             else index2++;
-        }
-
-        while(index1 < word1Indexes.size()) {
-            p1 = word1Indexes.get(index1++);
-            min_dist = Math.min(min_dist, Math.abs(p1-p2));
-        }
-
-        while(index2 < word2Indexes.size()) {
-            p2 = word2Indexes.get(index2++);
-            min_dist = Math.min(min_dist, Math.abs(p1-p2));
         }
 
         return min_dist;

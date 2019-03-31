@@ -92,7 +92,7 @@ public class BasicCalculatorII {
 
     public static void main(String[] args) {
         BasicCalculatorII obj = new BasicCalculatorII();
-        System.out.println(obj.calculate("1*2-3/4+5*6-7*8+9/10"));
+        System.out.println(obj.calculateV2("1*2-3/4+5*6-7*8+9/10"));
         System.out.println(obj.calculate("3/2"));
         System.out.println(obj.calculate("3+2*2"));
     }

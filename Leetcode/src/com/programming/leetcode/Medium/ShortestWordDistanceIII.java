@@ -51,4 +51,10 @@ public class ShortestWordDistanceIII {
         }
         return min_dis;
     }
+
+    public static void main(String[] args) {
+        ShortestWordDistanceIII obj = new ShortestWordDistanceIII();
+        System.out.println(obj.shortestWordDistance(new String[]{"practice", "makes", "perfect", "coding", "makes"},"makes","coding"));
+        System.out.println(obj.shortestWordDistance(new String[]{"practice", "makes", "perfect", "coding", "makes"},"makes","makes"));
+    }
 }

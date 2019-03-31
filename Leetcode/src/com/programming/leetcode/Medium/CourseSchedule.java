@@ -6,19 +6,10 @@ public class CourseSchedule {
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, List<Integer>> mapOfVertices = new HashMap<>();
-
         for(int[] mapping : prerequisites){
-            if(mapOfVertices.containsKey(mapping[1])){
-               mapOfVertices.get(mapping[1]).add(mapping[0]);
-            }else{
-                List<Integer> arrList = new ArrayList<>();
-                arrList.add(mapping[0]);
-                mapOfVertices.put(mapping[1], arrList);
-            }
+            mapOfVertices.computeIfAbsent(mapping[1], k -> new ArrayList<>()).add(mapping[0]);
         }
-
         Set<Integer> visited = new HashSet<>();
-
         for(int i =0; i< numCourses;i++){
             if(!helperDFS(mapOfVertices, visited, i)){
                 return false;

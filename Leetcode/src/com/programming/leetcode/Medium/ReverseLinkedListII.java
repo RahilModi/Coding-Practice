@@ -12,7 +12,7 @@ public class ReverseLinkedListII {
         }
         int diff = n-m;
 
-        // 1 - 2 -3 - 4 - 5 ; m=2; n =4 ---> pre = 1, start = 2, then = 3
+        // 1 - 2 - 3 - 4 - 5 ; m=2; n =4 ---> pre = 1, start = 2, then = 3
         // dummy-> 1 -> 2 -> 3 -> 4 -> 5
         ListNode start = prev.next;
         ListNode then = start.next;

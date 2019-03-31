@@ -110,6 +110,26 @@ public class GroupAnagram {
         return new ArrayList<>(grouped.values());
     }
 
+    public List<List<String>> groupAnagramsV4(String[] strs) {
+        //todo: sanity checks
+        if(strs == null || strs.length == 0) return new ArrayList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for(String s : strs){
+            int[] dicts = new int[26];
+            for(char c : s.toCharArray()){
+                dicts[c - 'a'] += 1;
+            }
+            StringBuilder sb = new StringBuilder();
+            for(int i =0; i < 26; i++){
+                if(dicts[i] != 0){
+                    sb.append((char)(i + 'a')).append(dicts[i]);
+                }
+            }
+            map.computeIfAbsent(sb.toString(), k->new ArrayList<>()).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+
 
 
 

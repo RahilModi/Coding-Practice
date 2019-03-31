@@ -24,6 +24,10 @@ public class PalindromePartitioning {
         }
     }
 
+    public boolean isPalindromV1(String str){
+        return new StringBuilder(str).reverse().toString().equals(str);
+    }
+
     public boolean isPalindrom(String str){
         if(str.length()==1) return true;
         int mid_pos = str.length()%2==0 ? str.length()/2 : (str.length()+1)/2;

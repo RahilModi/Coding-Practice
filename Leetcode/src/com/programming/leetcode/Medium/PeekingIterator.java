@@ -1,6 +1,8 @@
 package com.programming.leetcode.Medium;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class PeekingIterator implements Iterator<Integer>{
 
@@ -29,5 +31,15 @@ public class PeekingIterator implements Iterator<Integer>{
     @Override
     public boolean hasNext() {
         return next != null;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> res = new ArrayList<>();
+        res.add(1);
+        res.add(2);
+        res.add(3);
+        PeekingIterator obj = new PeekingIterator(res.iterator());
+        System.out.println(obj.peek());
+        System.out.println(obj.next());
     }
 }
