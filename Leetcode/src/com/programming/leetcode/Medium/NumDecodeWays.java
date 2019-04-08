@@ -42,11 +42,10 @@ public class NumDecodeWays {
         dp[n] = 1;
         dp[n-1] = s.charAt(n-1) == '0' ? 0 : 1;
 
-        for(int i = n-2; i >= 0; i++){
+        for(int i = n-2; i >= 0; i--){
             if(s.charAt(i) == '0') continue;
             else{
-                dp[i] = dp[i+1];
-                dp[i] += Integer.valueOf(s.substring(i,i+2)) <= 26 ?  dp[i+2] : 0;
+                dp[i] = dp[i+1] + Integer.valueOf(s.substring(i,i+2)) <= 26 ?  dp[i+2] : 0;
             }
         }
 

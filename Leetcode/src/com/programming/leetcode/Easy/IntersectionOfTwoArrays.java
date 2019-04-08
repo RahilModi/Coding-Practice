@@ -19,12 +19,7 @@ public class IntersectionOfTwoArrays {
             }
         }
 
-        int[] result = new int[res.size()];
-        int index = 0;
-        for(Object o : res){
-            result[index++] = ((Integer) o).intValue();
-        }
-        return result;
+        return res.stream().mapToInt(i->i).toArray();
     }
 
     public static void main(String[] args) {

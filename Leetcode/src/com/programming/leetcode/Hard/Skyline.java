@@ -82,11 +82,7 @@ public class Skyline {
 
         // sort $height, based on the first value, if necessary, use the second to
         // break ties
-        Collections.sort(height, (a, b) -> {
-            if(a[0] != b[0])
-                return a[0] - b[0];
-            return a[1] - b[1];
-        });
+        Collections.sort(height, (a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1] );
 
         /*
         // Use a maxHeap to store possible heights

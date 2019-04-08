@@ -22,14 +22,15 @@ public class VerticalOrderBinaryTree {
 
     public void verticalTraversalHelper(TreeNode node, TreeMap<Integer, PriorityQueue<int[]>> map, int horizontal_distance, int height){
         if(node == null) return;
-        PriorityQueue<int[]> vertical = map.getOrDefault(horizontal_distance, new PriorityQueue<int[]>(new Comparator<int[]>() {
-            @Override
-            public int compare(int[] a, int[] b) {
-                return a[1]==b[1]?a[0]-b[0] : a[1]-b[1];
-            }
-        }));
-        vertical.add(new int[]{node.val,height});
-        map.put(horizontal_distance, vertical);
+//        PriorityQueue<int[]> vertical = map.getOrDefault(horizontal_distance, new PriorityQueue<int[]>(new Comparator<int[]>() {
+//            @Override
+//            public int compare(int[] a, int[] b) {
+//                return a[1]==b[1]?a[0]-b[0] : a[1]-b[1];
+//            }
+//        }));
+//        vertical.add(new int[]{node.val,height});
+//        map.put(horizontal_distance, vertical);
+        map.computeIfAbsent(horizontal_distance, k-> new PriorityQueue<int[]>((a,b)->a[1]==b[1] ? a[0]-b[0] : a[1]-b[1])).add(new int[]{node.val, height});
         verticalTraversalHelper(node.left, map, horizontal_distance-1, height+1);
         verticalTraversalHelper(node.right, map, horizontal_distance+1, height+1);
     }

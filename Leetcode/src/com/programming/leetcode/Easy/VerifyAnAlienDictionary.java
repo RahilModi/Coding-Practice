@@ -8,9 +8,9 @@ public class VerifyAnAlienDictionary {
     public boolean isAlienSorted(String[] words, String order) {
 
         int[] sorted = new int[26];
-        int index = 26;
+        int index = 0;
         for(char c: order.toCharArray()){
-            sorted[c-'a'] = index--;
+            sorted[c-'a'] = index++;
         }
 
         for(int i = 1; i < words.length; i++){
@@ -20,7 +20,7 @@ public class VerifyAnAlienDictionary {
             for(; j < Math.min(str.length(),str2.length()); j++){
                 char c1 = str.charAt(j), c2 =str2.charAt(j);
                 if(c1 != c2) {
-                    if (sorted[c1 - 'a'] < sorted[c2 - 'a']) return false;
+                    if (sorted[c1 - 'a'] > sorted[c2 - 'a']) return false;
                     else {
                         bMisMatch = true;
                         break;

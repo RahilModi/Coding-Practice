@@ -16,8 +16,7 @@ public class nextPermutation {
             i--;
         }
         if(i != 0) {
-            int index = nums.length - 1;
-            int j = i - 1;
+            int index = nums.length - 1, j = i - 1;
             while (index > j) {
                 if (nums[index] > nums[j]) {
                     int t = nums[j];

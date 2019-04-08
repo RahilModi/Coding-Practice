@@ -22,9 +22,7 @@ public class NestedIterator implements Iterator<Integer> {
 
     Stack<NestedInteger> stack = new Stack<>();
     public NestedIterator(List<NestedInteger> nestedList) {
-        for(int i = nestedList.size()-1; i >=0; i-- ){
-            stack.push(nestedList.get(i));
-        }
+        addToStack(nestedList);
     }
 
     @Override
@@ -38,10 +36,14 @@ public class NestedIterator implements Iterator<Integer> {
             NestedInteger obj = stack.peek();
             if (obj.isInteger()) return true;
             obj = stack.pop();
-            for (int i = obj.getList().size() - 1; i >= 0; i--) {
-                stack.push(obj.getList().get(i));
-            }
+            addToStack(obj.getList());
         }
         return false;
+    }
+
+    private void addToStack(List<NestedInteger> obj){
+        for (int i = obj.size() - 1; i >= 0; i--) {
+            stack.push(obj.get(i));
+        }
     }
 }
